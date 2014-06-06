@@ -9,7 +9,7 @@
 	<app main="garden.Main" file="garden" path="bin" />
 
 	<window background="#000000" fps="60" />
-	<window width="800" height="480" unless="mobile" />
+	<window width="1024" height="768" unless="mobile || web" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 
 	<!-- classpath, haxe libs -->
@@ -17,7 +17,6 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="promhx" />
-	<haxelib name="stablexui" />
 
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />

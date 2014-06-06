@@ -20,6 +20,7 @@ class Garden extends Sprite{
 	
 	public function new() {
 		super();
+
 		//var text = new TextField();
 		//var format = new TextFormat();
 			//text.text = "Frrog3";
@@ -28,11 +29,12 @@ class Garden extends Sprite{
     //format.color = 0xBBBBBB;
 //text.x = 100;
 //text.y = 100;
-			//text.text = "a";
-    //text.setTextFormat(format);
-		//
 		//addChild(text);
-		var http = new Http('localhost:3000');
+    //text.setTextFormat(format);
+
+			//text.text = "a";
+		
+		var http = new Http('localhost:8083');
 		//var def = new Deferred<Dynamic>();
 		//haxe.Timer.delay(function() def.resolve(null), 5000);
 		//def.promise().then(function(i) {
@@ -51,8 +53,12 @@ class Garden extends Sprite{
 	}
 	
 	function populate_list(response) {
+		trace('hey');
 		var list = new List();
-		//list.add(new Link("A"));
+		addChild(list.element);
+		list.x = 10;
+		list.y = 10;
+	//list.add(new Link("A"));
 		//list.add(new Link("B"));
 		
 		//var trellises:StringMap<Dynamic> = cast response.trellises;
@@ -60,14 +66,13 @@ class Garden extends Sprite{
 		//for (trellis in trellises) {
 			//list.add(new Link(trellis.name));
 		//}
-		
+		trace("response", Type.typeof(response));
+		trace("trellises", Type.typeof(response.trellises));
 		for (i in Reflect.fields(response.trellises)) {
 			var trellis = Reflect.field(response.trellises, i);
 			list.add(new Link(i));
 		}
 		
-		
-		addChild(list);
 
 		trace('done populating');
 	}

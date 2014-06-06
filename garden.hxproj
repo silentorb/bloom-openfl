@@ -11,28 +11,26 @@
     <movie version="3" />
     <movie minorVersion="0" />
     <movie platform="NME" />
-    <movie background="000000" />
+    <movie background="#000000" />
     <movie preferredSDK=";3;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="E:\Programs\HaxeToolkit\haxe\lib\promhx\1,0,3\src\main" />
-    <class path="E:\Programs\HaxeToolkit\haxe\lib\stablexui\1,0,17" />
-    <class path="E:\Programs\HaxeToolkit\haxe\lib\actuate\1,7,3" />
     <class path="E:\Programs\HaxeToolkit\haxe\lib\openfl\2,0,0-beta,2" />
-    <class path="E:\Programs\HaxeToolkit\haxe\lib\hscript\2,0,1" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\actuate\1,7,3" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\promhx\1,0,3\src\main" />
     <class path="src" />
-    <class path="E:\Programs\HaxeToolkit\haxe\lib\openfl\2,0,0-beta,2\backends\native" />
-    <class path="bin\windows\cpp\haxe" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\openfl\2,0,0-beta,2\backends\html5" />
+    <class path="bin\html5\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="promhx=&#xA;stablexui=1.0.17&#xA;actuate=1.7.3&#xA;openfl=2.0.0-beta.2&#xA;hscript=2.0.1&#xA;tools=1.5.1&#xA;lime_native&#xA;no-compilation&#xA;native&#xA;openfl-native&#xA;display&#xA;windows&#xA;desktop" />
+    <option directives="openfl=2.0.0-beta.2&#xA;actuate=1.7.3&#xA;promhx=&#xA;tools=1.5.1&#xA;openfl-html5&#xA;display&#xA;html5&#xA;web&#xA;html5" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;--remap flash:openfl&#xA;--macro keep(&quot;garden.Main&quot;)" />
+    <option additional="--macro allowPackage('flash')&#xA;--no-output&#xA;--remap flash:openfl&#xA;--macro allowPackage(&quot;flash&quot;)" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
@@ -53,7 +51,9 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False" />
+  <postBuildCommand alwaysRun="False">c:\windows\system32\cmd.exe /C copy "$(OutputDir)\assets\flash.html" "$(OutputDir)\bin\html5\bin\flash.html"
+
+c:\windows\system32\cmd.exe /C copy "$(OutputDir)\bin\flash\bin\garden.swf" "$(OutputDir)\bin\html5\bin\garden.swf"</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />

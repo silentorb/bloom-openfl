@@ -78,7 +78,11 @@ class Http {
 		.then(function(info) {
 			//trace('hey');
 			//trace('headers1', info.request.responseHeaders);
+			#if js
+			#elseif flash
+			#else
 			cookies = info.request.responseHeaders.get('Set-Cookie');
+			#end
 			//trace('session_token', cookies);
 			return Json.parse(info.response);
 		});
