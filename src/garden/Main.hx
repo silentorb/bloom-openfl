@@ -3,6 +3,7 @@ package garden;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
+//import ru.stablex.ui.UIBuilder;
 
 /**
  * ...
@@ -58,5 +59,6 @@ class Main extends Sprite {
 		Lib.current.stage.align = flash.display.StageAlign.TOP_LEFT;
 		Lib.current.stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
 		Lib.current.addChild(new Main());
+		//UIBuilder.init();
 	}
 }

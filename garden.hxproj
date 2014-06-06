@@ -16,23 +16,27 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\promhx\1,0,3\src\main" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\stablexui\1,0,17" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\actuate\1,7,3" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\openfl\2,0,0-beta,2" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\hscript\2,0,1" />
     <class path="src" />
+    <class path="E:\Programs\HaxeToolkit\haxe\lib\openfl\2,0,0-beta,2\backends\native" />
     <class path="bin\windows\cpp\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="tools=1.4.0&#xA;lime_native&#xA;no-compilation&#xA;display&#xA;windows&#xA;desktop" />
+    <option directives="promhx=&#xA;stablexui=1.0.17&#xA;actuate=1.7.3&#xA;openfl=2.0.0-beta.2&#xA;hscript=2.0.1&#xA;tools=1.5.1&#xA;lime_native&#xA;no-compilation&#xA;native&#xA;openfl-native&#xA;display&#xA;windows&#xA;desktop" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;--macro allowPackage('flash')&#xA;--macro keep(&quot;garden.Main&quot;)" />
+    <option additional="--no-output&#xA;--remap flash:openfl&#xA;--macro keep(&quot;garden.Main&quot;)" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="openfl" />
-    <library name="actuate" />
-    <library name="promhx" />
+    <!-- example: <library name="..." /> -->
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>

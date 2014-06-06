@@ -4,7 +4,7 @@
 
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
 	<meta title="garden" package="garden.garden" version="1.0.0" company="Christopher W. Johnson" />
-
+	<compilerflag name="--macro" value="allowPackage('flash')"/>
 	<!-- output -->
 	<app main="garden.Main" file="garden" path="bin" />
 
@@ -17,6 +17,7 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="promhx" />
+	<haxelib name="stablexui" />
 
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
