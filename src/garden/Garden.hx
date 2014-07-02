@@ -70,10 +70,9 @@ class Garden extends Sprite{
 		trace("trellises", Type.typeof(response.trellises));
 		for (i in Reflect.fields(response.trellises)) {
 			var trellis = Reflect.field(response.trellises, i);
-			list.add(new Link(i));
+			list.add(new Link(i, this));
 		}
 		
-
 		trace('done populating');
 	}
 

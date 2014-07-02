@@ -9,10 +9,12 @@ import openfl.text.TextFormat;
 class Link extends Flower<TextField>
 {
 	//var text:TextField;
+	var garden:Garden;
 	
-	public function new(title:String = null)
+	public function new(title:String = null, garden:Garden)
 	{	
 		super();
+		this.garden = garden;
 		var text = element = new TextField();
 		if (title != null)
 			text.text = title;
@@ -28,6 +30,9 @@ class Link extends Flower<TextField>
 		this.height = text.textHeight;
 		
 		//element.addChild(text);
+		addEventListener(MouseEvent.CLICK, function() {
+			
+		});
 	}
 	
 }
