@@ -20,12 +20,13 @@ class Link extends Flower<TextField>
 		super();
 		this.channel = channel;
 		var text = element = new TextField();
+		text.width = 150;
 		if (title != null)
 			text.text = title;
 
 		var format = new TextFormat();
     format.font = "Arial";
-    format.size = 24;
+    format.size = 18;
     //format.color = 0xBBBBBB;
     text.setTextFormat(format);
 		text.selectable = false;

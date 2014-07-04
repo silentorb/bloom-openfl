@@ -97,5 +97,6 @@ class Garden extends Sprite{
 		main_view = view;
 		addChild(main_view.element);
 		main_view.x = 200;
+		main_view.y = 10;
 	}
 }

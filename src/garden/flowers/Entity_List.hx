@@ -13,14 +13,16 @@ import openfl.display.Sprite;
  * @author Christopher W. Johnson
  */
 class Entity_List extends Flower<Sprite> {
-	var trellis:Trellis;
+	var title:String;
+	var query:Query;
 
-	public function new(trellis:Trellis, garden:Garden) {
+	public function new(title:String,query:Query, garden:Garden) {
 		super();
-		this.trellis = trellis;
+		this.title = title;
+		this.query = query;
 		element = new Sprite();
 				var text = new TextField();
-			text.text = trellis.name;
+			text.text = title;
 
 		var format = new TextFormat();
     format.font = "Arial";
@@ -29,15 +31,15 @@ class Entity_List extends Flower<Sprite> {
     text.setTextFormat(format);
 		element.addChild(text);
 		
-		var query = new Query(trellis);
 		query.run(garden.remote)
 		.then(function(response) {
 			var list = new List();
+			list.element.y = 30;
 			var objects = response.objects;
 			element.addChild(list.element);
 			for (i in Reflect.fields(objects)) {
 				var entity = Reflect.field(objects, i);
-				var channel = new Entity_Channel(trellis, trellis.get_identity(entity));
+				var channel = new Entity_Channel(query.trellis, query.trellis.get_identity(entity));
 				var link = new Link(entity.name, channel);
 				list.add(link);
 			}
