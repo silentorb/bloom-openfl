@@ -1,5 +1,6 @@
 package bloom;
 import openfl.display.DisplayObject;
+import openfl.events.*;
 
 /**
  * ...
@@ -8,10 +9,21 @@ import openfl.display.DisplayObject;
 
 class Flower<T:(DisplayObject)> implements IFlower
 {
-	public var element:T;
+	//var _element:T;
 	
-	public function get_element():DisplayObject {
+	public function get_general_element():DisplayObject {
 		return element;
+	}
+	
+	var _element:T;
+	public var element(get,set) : T;
+  function get_element(){ return _element; } 
+	function set_element(value) { 
+		if (_element == value)
+			return _element;
+		
+		_element = value;
+		return _element;
 	}
 	
 	var _x:Float = 0;
@@ -62,6 +74,6 @@ class Flower<T:(DisplayObject)> implements IFlower
 	
 	public function new() 
 	{
-		
+
 	}
 }

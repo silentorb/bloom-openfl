@@ -21,8 +21,8 @@ class Entity_List extends Flower<Sprite> {
 		this.title = title;
 		this.query = query;
 		element = new Sprite();
-				var text = new TextField();
-			text.text = title;
+		var text = new TextField();
+		text.text = title;
 
 		var format = new TextFormat();
     format.font = "Arial";

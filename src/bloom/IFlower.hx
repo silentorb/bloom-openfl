@@ -7,7 +7,7 @@ import openfl.display.DisplayObject;
 
 interface IFlower 
 {
-	function get_element():DisplayObject;
+	function get_general_element():DisplayObject;
   var x(get,set):Float;
 	var y(get,set):Float;
 	var width(get,set):Float;

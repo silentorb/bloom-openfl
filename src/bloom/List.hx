@@ -14,15 +14,16 @@ class List extends Flower<Sprite>
 	{
 		super();
 		element = new Sprite();
+		element.addChild(new Background(0xf4f4f4, element));
 	}
 	
 	public function add(child:IFlower) {
-		trace('b', height, child.height);
+		//trace('b', height, child.height);
 		//child.y = height;
 		child.y = height;
 		_height += child.height;
 		children.push(child);
-		element.addChild(child.get_element());
+		element.addChild(child.get_general_element());
 		//addChild(child);
 	}
 }
