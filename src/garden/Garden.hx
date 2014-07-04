@@ -1,9 +1,16 @@
 package garden;
-import bloom.Link;
+import bloom.Flower;
+import bloom.IFlower;
+import garden.channels.Trellis_Channel;
+import garden.flowers.Link;
 import bloom.List;
 import haxe.ds.StringMap;
+import metahub.Hub;
+import metahub.schema.Schema;
+import metahub.schema.Trellis;
 import network.Http;
 import flash.display.Sprite;
+import openfl.display.DisplayObject;
 import flash.text.TextField;
 import flash.text.TextFormat;
 import promhx.Deferred;
@@ -17,10 +24,15 @@ import vineyard.Vineyard;
 
 class Garden extends Sprite{
 	var vineyard:Vineyard;
-	
+	var schema:Schema;
+	var main_view:Flower<Sprite>;
+
+	var remote:Http;
+
 	public function new() {
 		super();
 
+		schema = new Schema();
 		//var text = new TextField();
 		//var format = new TextFormat();
 			//text.text = "Frrog3";
@@ -33,26 +45,29 @@ class Garden extends Sprite{
     //text.setTextFormat(format);
 
 			//text.text = "a";
-		
-		var http = new Http('localhost:8083');
+
+		remote = new Http('localhost:3000');
 		//var def = new Deferred<Dynamic>();
 		//haxe.Timer.delay(function() def.resolve(null), 5000);
 		//def.promise().then(function(i) {
 			//trace('it worked');
 		//});
 
-		http.login('cj', 'pass')
+		remote.login('cj', 'test')
 		.then(function(response) {
 			trace('logged in');
-			return http.get_json('vineyard/schema')
+			return remote.get_json('vineyard/schema')
 			.then(function(response) {
 				trace('populating list...');
-				populate_list(response);
+				schema.load_trellises(response.trellises);
+				trace('r', Reflect.fields(response));
+				trace('trellises', Reflect.fields(response.trellises));
+				populate_list(schema.trellises);
 			});
 		});
 	}
-	
-	function populate_list(response) {
+
+	function populate_list(trellises:Array<Trellis>) {
 		trace('hey');
 		var list = new List();
 		addChild(list.element);
@@ -60,20 +75,34 @@ class Garden extends Sprite{
 		list.y = 10;
 	//list.add(new Link("A"));
 		//list.add(new Link("B"));
-		
+
 		//var trellises:StringMap<Dynamic> = cast response.trellises;
 		//trace('trellises', response);
 		//for (trellis in trellises) {
 			//list.add(new Link(trellis.name));
 		//}
-		trace("response", Type.typeof(response));
-		trace("trellises", Type.typeof(response.trellises));
-		for (i in Reflect.fields(response.trellises)) {
-			var trellis = Reflect.field(response.trellises, i);
-			list.add(new Link(i, this));
+		for (trellis in trellises) {
+			var channel = new Trellis_Channel(trellis, this);
+			list.add(new Link(trellis.name, channel));
 		}
-		
+
 		trace('done populating');
+	}
+
+	public function set_main_view(view:Flower<Sprite>) {
+		if (main_view != null) {
+			removeChild(main_view.element);
+		}
+
+		main_view = view;
+		addChild(main_view.element);
+		main_view.x = 200;
+	}
+
+	public function create_query(trellis:Trellis):Promise<Dynamic> {
+		var query = new Query(trellis);
+		var json = query.render();
+		return remote.post_json('vineyard/schema', json);
 	}
 
 }

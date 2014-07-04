@@ -13,6 +13,7 @@
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 
 	<!-- classpath, haxe libs -->
+	<source path="E:/Dev/metahub/src" />
 	<source path="src" />
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />

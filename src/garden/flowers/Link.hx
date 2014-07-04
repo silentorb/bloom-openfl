@@ -1,6 +1,10 @@
-package bloom;
+package garden.flowers;
+import bloom.Flower;
+import garden.channels.Channel;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import openfl.events.*;
+import garden.Garden;
 
 /**
  * ...
@@ -9,16 +13,16 @@ import openfl.text.TextFormat;
 class Link extends Flower<TextField>
 {
 	//var text:TextField;
-	var garden:Garden;
-	
-	public function new(title:String = null, garden:Garden)
-	{	
+	var channel:Channel;
+
+	public function new(title:String = null, channel:Channel)
+	{
 		super();
-		this.garden = garden;
+		this.channel = channel;
 		var text = element = new TextField();
 		if (title != null)
 			text.text = title;
-			
+
 		var format = new TextFormat();
     format.font = "Arial";
     format.size = 24;
@@ -28,11 +32,11 @@ class Link extends Flower<TextField>
 
 		//trace('a', text.text);
 		this.height = text.textHeight;
-		
+
 		//element.addChild(text);
-		addEventListener(MouseEvent.CLICK, function() {
-			
+		element.addEventListener(MouseEvent.CLICK, function(info) {
+			this.channel.goto();
 		});
 	}
-	
+
 }
