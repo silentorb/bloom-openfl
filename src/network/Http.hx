@@ -28,7 +28,7 @@ class Http {
 		return http(url, null, false);
 	}
 
-	public function post(url:String, data:Dynamic):Promise<Response_Info> {
+	public function post(url:String, data:String):Promise<Response_Info> {
 		return http(url, data, true);
 	}
 	
@@ -41,13 +41,13 @@ class Http {
 	}
 
 	public function post_json(url:String, data:Dynamic):Promise<Dynamic> {
-		return http(url, data, true)
+		return http(url, Json.stringify(data), true)
 		.then(function(info) {
 			return Json.parse(info.response);
 		});
 	}
 
-  function http(url:String, data:Dynamic, post:Bool):Promise<Response_Info> {
+  function http(url:String, data:String, post:Bool):Promise<Response_Info> {
     var def = new Deferred<Response_Info>();
     var r = new haxe.Http(create_url(url));
 		if (cookies != null) {
@@ -66,7 +66,7 @@ class Http {
       //def.resolve(Json.parse(response));
     }
 		if (post)
-			r.setPostData(Json.stringify(data));
+			r.setPostData(data);
 
 		r.setHeader('Content-Type', 'application/json');
     r.request(post);
@@ -74,7 +74,7 @@ class Http {
   }
 
 	public function login(name:String, password:String):Promise<Dynamic> {
-		return post('vineyard/login', { name: name, pass: password } )
+		return post('vineyard/login', Json.stringify({ name: name, pass: password }) )
 		.then(function(info) {
 			//trace('hey');
 			//trace('headers1', info.request.responseHeaders);

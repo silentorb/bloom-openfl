@@ -16,7 +16,7 @@ class Trellis_Channel implements Channel{
 	}
 
 	public function goto() {
-		var view = new Entity_List(trellis);
+		var view = new Entity_List(trellis, garden);
 		garden.set_main_view(view);
 	}
 

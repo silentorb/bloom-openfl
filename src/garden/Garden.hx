@@ -27,7 +27,7 @@ class Garden extends Sprite{
 	var schema:Schema;
 	var main_view:Flower<Sprite>;
 
-	var remote:Http;
+	public var remote:Http;
 
 	public function new() {
 		super();
@@ -46,14 +46,14 @@ class Garden extends Sprite{
 
 			//text.text = "a";
 
-		remote = new Http('localhost:3000');
+		remote = new Http('localhost:8083');
 		//var def = new Deferred<Dynamic>();
 		//haxe.Timer.delay(function() def.resolve(null), 5000);
 		//def.promise().then(function(i) {
 			//trace('it worked');
 		//});
 
-		remote.login('cj', 'test')
+		remote.login('cj', 'pass')
 		.then(function(response) {
 			trace('logged in');
 			return remote.get_json('vineyard/schema')
@@ -98,11 +98,4 @@ class Garden extends Sprite{
 		addChild(main_view.element);
 		main_view.x = 200;
 	}
-
-	public function create_query(trellis:Trellis):Promise<Dynamic> {
-		var query = new Query(trellis);
-		var json = query.render();
-		return remote.post_json('vineyard/schema', json);
-	}
-
 }

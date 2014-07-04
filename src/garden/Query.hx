@@ -1,11 +1,14 @@
 package garden;
 import metahub.schema.Trellis;
+import network.Http;
+import promhx.Promise;
+import haxe.Json;
 
 /**
  * ...
  * @author Christopher W. Johnson
  */
-class Query{
+class Query {
 
 	public var trellis:Trellis;
 
@@ -14,7 +17,18 @@ class Query{
 	}
 
 	public function render():String {
-		return "";
+		var data = {
+			trellis: trellis.name
+		};
+		return Json.stringify(data);
+	}
+	
+	public function run(remote:Http):Promise<Dynamic> {
+		var json = render();
+		return remote.post('vineyard/query', json)
+			.then(function(info) {
+			return Json.parse(info.response);
+		});
 	}
 
 }
