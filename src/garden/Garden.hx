@@ -24,7 +24,7 @@ import vineyard.Vineyard;
 
 class Garden extends Sprite{
 	var vineyard:Vineyard;
-	var schema:Schema;
+	var hub:Hub;
 	var main_view:Flower<Sprite>;
 
 	public var remote:Http;
@@ -32,7 +32,7 @@ class Garden extends Sprite{
 	public function new() {
 		super();
 
-		schema = new Schema();
+		hub = new Hub();
 		//var text = new TextField();
 		//var format = new TextFormat();
 			//text.text = "Frrog3";
@@ -59,15 +59,16 @@ class Garden extends Sprite{
 			return remote.get_json('vineyard/schema')
 			.then(function(response) {
 				trace('populating list...');
-				schema.load_trellises(response.trellises);
+				var namespace = hub.schema.add_namespace('garden');
+				hub.schema.load_trellises(response.trellises, namespace);
 				trace('r', Reflect.fields(response));
 				trace('trellises', Reflect.fields(response.trellises));
-				populate_list(schema.trellises);
+				populate_list(namespace.trellises);
 			});
 		});
 	}
 
-	function populate_list(trellises:Array<Trellis>) {
+	function populate_list(trellises:Map<String, Trellis>) {
 		trace('hey');
 		var list = new List();
 		addChild(list.element);

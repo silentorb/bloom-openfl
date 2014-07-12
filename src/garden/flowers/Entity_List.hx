@@ -23,6 +23,7 @@ class Entity_List extends Flower<Sprite> {
 		element = new Sprite();
 		var text = new TextField();
 		text.text = title;
+		text.width = 200;
 
 		var format = new TextFormat();
     format.font = "Arial";
